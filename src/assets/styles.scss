@@ -1,8 +1,66 @@
-#app {
+html,
+body {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-color: #1c1c1c;
+  color: #c3c2c2;
+  margin: 40px 0;
+  font-size: 0.95em;
+}
+
+.tile-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.tile {
+  max-width: 300px;
+  background: #302e2e;
+  margin: 10px;
+  border-radius: 10px;
+
+  .title-container {
+    position: relative;
+    background-color: #000000c2;
+    padding: 10px 10px;
+
+    h1 {
+      font-weight: 400;
+      margin: 0;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  img {
+    border-radius: 10px;
+    margin-bottom: -86px;
+  }
+
+  .tile-info {
+    width: 85%;
+    margin: 35px auto;
+
+    p {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    hr {
+      border-top: 0px;
+      border-color: #c3c2c2;
+    }
+
+    span {
+      color: orange;
+      text-align: right;
+    }
+  }
 }
