@@ -9,6 +9,26 @@ body {
   font-size: 0.95em;
 }
 
+.order-by {
+  display: flex;
+  justify-content: center;
+
+  span {
+    cursor: pointer;
+    color: orange;
+  }
+
+  .ascending:after {
+    content: ' \2191';
+    font-size: 20px;
+  }
+
+  .descending:after {
+    content: ' \2193';
+    font-size: 20px;
+  }
+}
+
 .tile-container {
   display: flex;
   flex-direction: row;
@@ -20,6 +40,7 @@ body {
 
 .tile {
   max-width: 300px;
+  width: 300px;
   background: #302e2e;
   margin: 10px;
   border-radius: 10px;
@@ -28,6 +49,7 @@ body {
     position: relative;
     background-color: #000000c2;
     padding: 10px 10px;
+    cursor: pointer;
 
     h1 {
       font-weight: 400;
@@ -61,6 +83,39 @@ body {
     span {
       color: orange;
       text-align: right;
+      cursor: pointer;
     }
+  }
+}
+
+.keywords {
+  margin: 0 auto;
+  background: black;
+  border-radius: 10px;
+  width: 85%;
+
+  .filters {
+    margin: 0 0 0 20px;
+
+    div {
+      display: inline-flex;
+      padding: 5px 7px;
+
+      span {
+        margin: 20px 0 0 10px;
+        cursor: pointer;
+      }
+
+      h4 {
+        cursor: unset;
+      }
+    }
+  }
+  h5 {
+    position: absolute;
+    right: 100px;
+    top: 125px;
+    font-size: 1em;
+    cursor: pointer;
   }
 }
