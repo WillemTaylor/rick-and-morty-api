@@ -1,11 +1,6 @@
 <template>
   <div>
-    <div class="order-by">
-      <p>
-        Order by:
-        <span @click="handleSort">Name</span>
-      </p>
-    </div>
+    <Ordering :data="data" />
     <div v-if="filter" class="keywords">
       <div class="filters">
         <div v-if="!removeClicked && status">
@@ -19,6 +14,14 @@
         <div v-if="!removeClicked && gender">
           <h4>{{ gender }}</h4>
           <span id="gender" @click="handleRemoveFilter">&#10006;</span>
+        </div>
+        <div v-if="!removeClicked && origin">
+          <h4>{{ origin }}</h4>
+          <span id="origin" @click="handleRemoveFilter">&#10006;</span>
+        </div>
+        <div v-if="!removeClicked && location">
+          <h4>{{ location }}</h4>
+          <span id="location" @click="handleRemoveFilter">&#10006;</span>
         </div>
       </div>
       <h5 @click="removeFilterDashboard">Clear</h5>
@@ -42,30 +45,22 @@
           <hr />
           <p>
             SPECIES
-            <span id="species" @click="handleClickFilter">
-              {{
-              tile.species
-              }}
-            </span>
+            <span id="species" @click="handleClickFilter">{{ tile.species }}</span>
           </p>
           <hr />
           <p>
             GENDER
-            <span id="gender" @click="handleClickFilter">
-              {{
-              tile.gender
-              }}
-            </span>
+            <span id="gender" @click="handleClickFilter">{{ tile.gender }}</span>
           </p>
           <hr />
           <p>
             ORIGIN
-            <span>{{ tile.origin.name }}</span>
+            <span id="origin" @click="handleClickFilter">{{ tile.origin.name }}</span>
           </p>
           <hr />
           <p>
             LAST LOCATION
-            <span>{{ tile.location.name }}</span>
+            <span id="location" @click="handleClickFilter">{{ tile.location.name }}</span>
           </p>
         </div>
       </div>
@@ -74,94 +69,95 @@
 </template>
 
 <script>
-import axios from "axios";
+import axios from 'axios';
+import Ordering from './ordering';
 
 export default {
+  components: {
+    Ordering,
+  },
   data() {
     return {
-      data: "",
+      data: [],
       filter: false,
       removeClicked: false,
-      status: "",
-      species: "",
-      gender: "",
-      origin: "",
-      location: "",
-      isAscending: null
+      status: '',
+      species: '',
+      gender: '',
+      origin: '',
+      location: '',
+      isAscending: null,
     };
   },
   mounted() {
-    axios
-      .get("https://rickandmortyapi.com/api/character/")
-      .then(response => (this.data = response.data.results));
+    axios.get('https://rickandmortyapi.com/api/character/').then((response) => (this.data = response.data.results));
   },
   computed: {
     handleShowTiles() {
       let status = this.status;
       let species = this.species;
       let gender = this.gender;
-      // let origin = this.origin;
-      // let location = this.location
+      let origin = this.origin;
+      let location = this.location;
 
-      if (status || species || gender) {
+      if (status || species || gender || origin || location) {
         return this.data
-          .filter(arr => (status.length > 0 ? arr.status === status : arr))
-          .filter(arr => (species.length > 0 ? arr.species === species : arr))
-          .filter(arr => (gender.length > 0 ? arr.gender === gender : arr));
+          .filter((arr) => (status.length > 0 ? arr.status === status : arr))
+          .filter((arr) => (species.length > 0 ? arr.species === species : arr))
+          .filter((arr) => (gender.length > 0 ? arr.gender === gender : arr))
+          .filter((arr) => (origin.length > 0 ? arr.origin.name === origin : arr))
+          .filter((arr) => (location.length > 0 ? arr.location.name === location : arr));
       } else return this.removeFilterDashboard();
-    }
+    },
   },
   methods: {
     handleShowEpisodes(val) {
-      sessionStorage.setItem("episodes", JSON.stringify(val));
-      this.$router.push("episodes");
-    },
-    handleSort() {
-      event.target.classList.remove("ascending");
-      event.target.classList.remove("descending");
-
-      if (this.isAscending) {
-        this.data.sort((a, b) => a.name.localeCompare(b.name));
-        event.target.classList.add("descending");
-      } else {
-        this.data.sort((a, b) => b.name.localeCompare(a.name));
-        event.target.classList.add("ascending");
-      }
-      this.isAscending = !this.isAscending;
+      sessionStorage.setItem('episodes', JSON.stringify(val));
+      this.$router.push('episodes');
     },
     removeFilterDashboard() {
-      this.status = "";
-      this.species = "";
-      this.gender = "";
+      this.status = '';
+      this.species = '';
+      this.gender = '';
+      this.origin = '';
+      this.location = '';
       this.filter = false;
       return this.data;
     },
     handleRemoveFilter() {
       let id = event.target.id;
 
-      id === "status"
-        ? (this.status = "")
-        : id === "species"
-        ? (this.species = "")
-        : id === "gender"
-        ? (this.gender = "")
-        : "";
+      id === 'status'
+        ? (this.status = '')
+        : id === 'species'
+        ? (this.species = '')
+        : id === 'gender'
+        ? (this.gender = '')
+        : id === 'origin'
+        ? (this.origin = '')
+        : id === 'location'
+        ? (this.location = '')
+        : '';
       this.handleShowTiles;
     },
     handleClickFilter() {
       let result = event.target.innerHTML;
       let id = event.target.id;
 
-      id === "status"
+      id === 'status'
         ? (this.status = result)
-        : id === "species"
+        : id === 'species'
         ? (this.species = result)
-        : id === "gender"
+        : id === 'gender'
         ? (this.gender = result)
-        : "";
+        : id === 'origin'
+        ? (this.origin = result)
+        : id === 'location'
+        ? (this.location = result)
+        : '';
       this.removeClicked = false;
       this.filter = true;
-    }
-  }
+    },
+  },
 };
 </script>

@@ -54,6 +54,10 @@ body {
     h1 {
       font-weight: 400;
       margin: 0;
+
+      &:hover {
+        color: orange;
+      }
     }
 
     p {
@@ -89,21 +93,39 @@ body {
 }
 
 .keywords {
-  margin: 0 auto;
-  background: black;
+  margin: 20px auto;
+  background: #302e2e;
   border-radius: 10px;
-  width: 85%;
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
 
   .filters {
-    margin: 0 0 0 20px;
-
     div {
       display: inline-flex;
-      padding: 5px 7px;
+      align-items: center;
+      margin: 5px 10px 0 0;
+      border-radius: 10px;
+      padding: 0 10px;
+      background-color: #1c1c1c;
+      height: 45px;
 
       span {
-        margin: 20px 0 0 10px;
+        position: relative;
         cursor: pointer;
+        left: 10px;
+        background: orange;
+        border-radius: 10px;
+        font-size: 16px;
+        padding: 12px 8px;
+        color: black;
+
+        &:hover {
+          background: black;
+          color: orange;
+        }
       }
 
       h4 {
@@ -112,10 +134,11 @@ body {
     }
   }
   h5 {
-    position: absolute;
-    right: 100px;
-    top: 125px;
     font-size: 1em;
     cursor: pointer;
+
+    &:hover {
+      color: orange;
+    }
   }
 }
