@@ -18,4 +18,5 @@ You should be able to:
 
 # Hosted site
 
+Project was written using Vue.js framework and deployed to Netlify
 https://profiling-rick-and-morty.netlify.app/
