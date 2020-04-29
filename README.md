@@ -1,12 +1,12 @@
-### Rick And Morty API Challenge
+# Rick And Morty API Challenge
 
 This development challenge was taken from the free Rick and Morty API here https://rickandmortyapi.com/.
 
-# The Challenge
+### The Challenge
 
 The task was to build a simple site by calling the API, and displaying each characters profile and basic information.
 
-# What it does
+### What it does
 
 You should be able to:
 
